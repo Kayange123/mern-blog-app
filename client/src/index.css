@@ -1,0 +1,41 @@
+@import '../node_modules/bootstrap/dist/css/bootstrap.css';
+@import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    background-color: rgba(234, 237, 236, 0.943);
+    font-family: sans-serif, monospace;
+    
+}
+.login-box{
+    max-width: fit-content;
+    display:flex;
+    flex-direction : column;
+    align-items:center;
+    justify-content:center;
+    box-shadow:10px 10px 10px #ccc;
+    padding: 20px;
+    margin :auto;
+    margin-top: 100px;
+    border-radius: 10px;
+}
+.button{
+    border: 2px solid #ccc;
+    width: 64%;
+    
+    
+}
+.title{
+    font-family:  sans-serif monospace;
+    font-size: 20px;
+}
+.error{
+    background-color: grey;
+    height: 30px;
+    width: "200px";
+    color: "red";
+}
