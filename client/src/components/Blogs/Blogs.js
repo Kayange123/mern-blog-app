@@ -11,8 +11,9 @@ const Blogs = () => {
   useEffect(() => {
     dispatch(getPosts());
   }, [dispatch]);
+
   return (
-    <div>
+    <div className="container">
       {blogs ? (
         blogs?.map((blog) => (
           <Blog
@@ -22,8 +23,10 @@ const Blogs = () => {
           />
         ))
       ) : (
-        <div>
-          <CircularProgress margin="auto" size={"6rem"} />
+        <div className="container">
+          <div className="text-center">
+            <CircularProgress margin="auto" size={"6rem"} />
+          </div>
         </div>
       )}
     </div>

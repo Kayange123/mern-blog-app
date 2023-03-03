@@ -2,7 +2,7 @@ import * as firebase from "firebase/app";
 import "firebase/firestore";
 import "firebase/storage";
 const firebaseConfig = {
-  apiKey: "AIzaSyDXc_m8qFn7bx-Bsm4XRSJ-JVcsWq5YwSw",
+  apiKey: process.env.FIREBASE_API_KEY,
   authDomain: "album-app-d7d6f.firebaseapp.com",
   projectId: "album-app-d7d6f",
   storageBucket: "album-app-d7d6f.appspot.com",

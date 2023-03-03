@@ -6,7 +6,6 @@ import {
   Typography,
   CardContent,
   Button,
-  Box,
   CardActions,
 } from "@mui/material";
 import {
@@ -25,7 +24,8 @@ const Blog = ({ blog, isUser, id }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [isLiked, setIsLiked] = useState(false);
-  //console.log(blog);
+
+  
   const handleLike = () => {
     dispatch(likePost(blog._id));
     setIsLiked((prevState) => !prevState);

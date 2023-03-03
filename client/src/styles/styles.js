@@ -3,8 +3,8 @@ import { makeStyles } from "@material-ui/styles";
 export const useStyles = makeStyles((theme) => ({
   appbar: {
     position: "static",
-    height: "10vh",
-    minWidth: "100vw",
+    height: "200",
+    minWidth: "100%",
   },
   toolbar: {
     display: "flex",

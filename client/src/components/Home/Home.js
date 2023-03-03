@@ -1,6 +1,5 @@
 import React from "react";
 import { Container } from "@mui/system";
-import Blogs from "../Blogs/Blogs";
 import { Grid } from "@material-ui/core";
 
 const Home = () => {

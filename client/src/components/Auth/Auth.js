@@ -7,7 +7,6 @@ import {
   IconButton,
 } from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
-import { googleId } from "../../secretKeys/googleId";
 import { GoogleLogin } from "react-google-login";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
@@ -119,7 +118,7 @@ const Auth = () => {
             </Button>
             <div className="mt-2">
               <GoogleLogin
-                clientId={googleId}
+                clientId={process.env.REACT_APP_GOOGLE_ID}
                 render={(renderProps) => (
                   <Button
                     color="primary"

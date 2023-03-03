@@ -1,11 +1,9 @@
 import React, { Suspense, useEffect, useState } from "react";
-import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import BlogDetails from "./components/Blogs/BlogDetails";
 import PopularBlogs from "./components/Blogs/PopularBlogs/PopularBlogs";
-import Header from "./components/Header";
+import Header from "./components/Header/Header";
 import { CircularProgress } from "@mui/material";
-import { useSelector } from "react-redux";
 
 const AddBlog = React.lazy(() => import("./components/Blogs/AddBlog"));
 const Blogs = React.lazy(() => import("./components/Blogs/Blogs"));
@@ -14,14 +12,12 @@ const User = React.lazy(() => import("./components/User/User"));
 
 function App() {
   const location = useLocation();
-  const state = useSelector((state) => state);
   const navigate = useNavigate();
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
 
   useEffect(() => {
     setUser(JSON.parse(localStorage.getItem("profile")));
   }, [location]);
-  console.log(state);
   return (
     <React.Fragment>
       <header>
