@@ -26,12 +26,12 @@ function App() {
           <Route element={<Layout user={user} />}>
             {user ? (
               <>
-                <Route path="/*" element={<Navigate to="/home" replace />} />
+                <Route path="/" element={<Navigate to="/home" replace />} />
                 <Route path="/home" element={<Home />} />
               </>
             ) : (
               <>
-                <Route path="/*" element={<Navigate to="/popular" replace />} />
+                <Route path="/" element={<Navigate to="/popular" replace />} />
                 <Route path="/auth" element={<Auth />} />
                 <Route path="/popular" element={<PopularBlogs />} />
               </>

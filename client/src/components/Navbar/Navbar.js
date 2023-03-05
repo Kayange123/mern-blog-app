@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   LightModeOutlined,
   DarkModeOutlined,
@@ -25,6 +25,7 @@ import { useDispatch } from "react-redux";
 import FlexBox from "../FlexBox";
 import { LOGOUT } from "../../constants/actionTypes";
 import { useNavigate } from "react-router-dom";
+import { useDecodedToken } from "../../hooks/useDecodedToken";
 
 const Navbar = ({ user, isSideBarOpen, setIsSideBarOpen }) => {
   const theme = useTheme();
@@ -32,6 +33,7 @@ const Navbar = ({ user, isSideBarOpen, setIsSideBarOpen }) => {
   const dispatch = useDispatch();
   const [anchorEl1, setAnchorEl1] = useState(null);
   const isOpen = Boolean(anchorEl1);
+  const decodedToken = useDecodedToken();
 
   const handleClose = () => setAnchorEl1(null);
   const handleClick = (e) => setAnchorEl1(e.currentTarget);
@@ -41,6 +43,10 @@ const Navbar = ({ user, isSideBarOpen, setIsSideBarOpen }) => {
     localStorage.clear();
     navigate("/popular");
   };
+
+  useEffect(() => {
+    if (decodedToken) logout();
+  });
   return (
     <AppBar
       sx={{

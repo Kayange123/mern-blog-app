@@ -1,25 +1,21 @@
-import { useEffect } from "react";
+import React from "react";
 import { Box, useMediaQuery, CircularProgress } from "@mui/material";
-import { useDispatch, useSelector } from "react-redux";
 import Blog from "./Blog";
-import { getPosts } from "../../actions";
+import { useGetBlogsQuery } from "../../reducers/api";
 
 const Blogs = () => {
   const isNonMobile = useMediaQuery("(min-width: 600px)");
-  const dispatch = useDispatch();
   const localUserId = JSON.parse(localStorage.getItem("profile"))?.result?._id;
-  const { blogs } = useSelector((state) => state.posts);
-  useEffect(() => {
-    dispatch(getPosts());
-  }, [dispatch]);
+  const { data, isLoading, isSuccess, isError } = useGetBlogsQuery();
+
   return (
-    <Box m="1.5rem 1.5rem" className="container">
-      {blogs ? (
+    <Box m="1.5rem 0.5rem">
+      {!isLoading ? (
         <Box
           display="grid"
           gridTemplateColumns="repeat(4, minmax(0 , 1fr))"
           justifyContent="space-between"
-          rowGap="20px"
+          rowGap="10px"
           columnGap="1.33%"
           mt="10px"
           sx={{
@@ -28,14 +24,16 @@ const Blogs = () => {
             },
           }}
         >
-          {blogs?.map((blog) => (
-            <Blog
-              key={blog._id}
-              blog={blog}
-              isUser={blog?.user._id === localUserId}
-              id={blog?._id}
-            />
-          ))}
+          {isSuccess &&
+            !isError &&
+            data?.blogs?.map((blog) => (
+              <Blog
+                key={blog._id}
+                blog={blog}
+                isUser={blog?.user._id === localUserId}
+                id={blog?._id}
+              />
+            ))}
         </Box>
       ) : (
         <div className="container">
