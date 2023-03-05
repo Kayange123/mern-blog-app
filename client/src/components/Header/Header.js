@@ -3,7 +3,6 @@ import "bootstrap/dist/js/bootstrap.bundle.min";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import {
-  AppBar,
   Avatar,
   Box,
   Button,

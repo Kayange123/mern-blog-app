@@ -5,8 +5,14 @@ import {
   TextField,
   InputAdornment,
   IconButton,
+  Typography,
+  useTheme,
 } from "@mui/material";
-import { Visibility, VisibilityOff } from "@mui/icons-material";
+import {
+  LockOpenOutlined,
+  Visibility,
+  VisibilityOff,
+} from "@mui/icons-material";
 import { GoogleLogin } from "react-google-login";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
@@ -15,8 +21,10 @@ import { Container, Paper, Toolbar } from "@material-ui/core";
 import { AUTH } from "../../constants/actionTypes";
 import { signin, signup } from "../../actions/auth";
 import { useStyles } from "./style";
+
 const initialState = { fullname: "", email: "", password: "" };
 const Auth = () => {
+  const theme = useTheme();
   const classes = useStyles();
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -48,6 +56,7 @@ const Auth = () => {
     const token = await res?.token;
     try {
       dispatch({ type: AUTH, data: { result, token } });
+      navigate("/home");
     } catch (error) {}
   };
   const googleFailure = (error) => {
@@ -58,10 +67,19 @@ const Auth = () => {
     <Container component="main" maxWidth="xs">
       <Paper elevation={0}>
         <form onSubmit={handleSubmit}>
-          <Box className={classes.card}>
-            {loginFeedback && <Toolbar>{loginFeedback}</Toolbar>}
+          <Box
+            sx={{ backgroundColor: theme.palette.secondary.alt }}
+            className={classes.card}
+          >
             <Toolbar className={classes.card_head}>
-              {isSignUp ? "SignUp" : <Avatar></Avatar>}
+              {loginFeedback && <Typography>{loginFeedback}</Typography>}
+              {isSignUp ? (
+                "SignUp"
+              ) : (
+                <Avatar>
+                  <LockOpenOutlined />
+                </Avatar>
+              )}
             </Toolbar>
             {isSignUp && (
               <TextField

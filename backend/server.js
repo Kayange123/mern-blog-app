@@ -14,15 +14,15 @@ app.use("/api", router);
 app.use("/api", userRoutes);
 dotenv.config();
 
+const mongo = "mongodb://127.0.0.1:27017/blog";
 const PORT = process.env.PORT || 5000;
 
 mongoose
-  .connect(process.env.REACT_APP_MONGODB_URL, {
+  .connect(mongo, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
   .then(() => app.listen(PORT))
-
   .then(() => {
     console.log(`Connected to database and app is running on port ${PORT}`);
   })

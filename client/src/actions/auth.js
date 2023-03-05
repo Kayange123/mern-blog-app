@@ -4,7 +4,7 @@ export const signin = (form, navigate) => async (dispatch) => {
   try {
     const { data } = await api.signin(form);
     dispatch({ type: AUTH, data });
-    navigate("/blogs");
+    navigate("/home");
   } catch (error) {
     console.log(error);
   }
@@ -13,7 +13,7 @@ export const signup = (form, navigate) => async (dispatch) => {
   try {
     const { data } = await api.signup(form);
     dispatch({ type: AUTH, data });
-    navigate("/blogs");
+    navigate("/home");
   } catch (error) {
     console.log(error);
   }
