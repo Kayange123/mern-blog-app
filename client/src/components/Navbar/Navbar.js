@@ -33,10 +33,11 @@ const Navbar = ({ user, isSideBarOpen, setIsSideBarOpen }) => {
   const dispatch = useDispatch();
   const [anchorEl1, setAnchorEl1] = useState(null);
   const isOpen = Boolean(anchorEl1);
-  const decodedToken = useDecodedToken();
+  const decodedToken = useDecodedToken(user?.token);
 
   const handleClose = () => setAnchorEl1(null);
   const handleClick = (e) => setAnchorEl1(e.currentTarget);
+
   const logout = () => {
     dispatch({ type: LOGOUT });
     handleClose();

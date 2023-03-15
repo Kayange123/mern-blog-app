@@ -21,6 +21,7 @@ const Header = ({ user, setUser }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const classes = useStyles();
+
   const logout = () => {
     dispatch({ type: LOGOUT });
     localStorage.clear();

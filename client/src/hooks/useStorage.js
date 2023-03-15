@@ -1,5 +1,9 @@
 import { useState, useEffect } from "react";
-import { blogsStorage, blogsFirestore, timestamp } from "../firebase/firebaseConfig";
+import {
+  blogsStorage,
+  blogsFirestore,
+  timestamp,
+} from "../firebase/firebaseConfig";
 
 const UseStorage = (file) => {
   const [progress, setProgress] = useState(0);
@@ -20,9 +24,9 @@ const UseStorage = (file) => {
         setError(error);
       },
       async () => {
-          const url = await storageRef.getDownloadURL();
-          const createdAt = timestamp();
-          collectionRef.add({url, createdAt})
+        const url = await storageRef.getDownloadURL();
+        const createdAt = timestamp();
+        collectionRef.add({ url, createdAt }); 
         setUrl(url);
       }
     );

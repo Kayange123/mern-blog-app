@@ -52,15 +52,15 @@ export const postBlog = async (req, res, next) => {
   });
 
   try {
-    // const session = await mongoose.startSession();
-    // session.startTransaction();
+    const session = await mongoose.startSession();
+    session.startTransaction();
     // await blog.save({ session });
     // existingUser.blogs.push(blog);
     // await existingUser.save({ session });
-    // await session.commitTransaction();
-    await blog.save();
+    await blog.save({ session });
     existingUser.blogs.push(blog);
-    await existingUser.save();
+    await existingUser.save({ session });
+    await session.commitTransaction();
   } catch (error) {
     console.log(error);
     return res.status(500).json({ message: error });
@@ -69,7 +69,7 @@ export const postBlog = async (req, res, next) => {
   return res.status(200).json({ blog });
 };
 
-export const updateBlog = async (req, res, next) => {
+export const updateBlog = async (req, res) => {
   const blogId = req.params.id;
   let blog;
   const { title, article, tags } = req.body;
@@ -142,8 +142,10 @@ export const likePost = async (req, res) => {
     const post = await Blog.findById(id);
     const index = post.likes.findIndex((id) => id === String(req.userId));
     if (index === -1) {
+      //Like a post
       post.likes.push(req.userId);
     } else {
+      //Dislike a post
       post.likes.filter((id) => id !== req.userId);
     }
     const likedPost = await Blog.findByIdAndUpdate(id, post, { new: true });

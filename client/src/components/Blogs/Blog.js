@@ -73,13 +73,12 @@ const Blog = ({ blog, isUser, id }) => {
         <Typography
           sx={{ color: theme.palette.primary[100], cursor: "pointer" }}
           variant="body2"
-          color="textSecondary"
           gutterBottom
           onClick={() => navigate("/user/profile")}
         >
           {blog.user.name}
         </Typography>
-        <Typography>{blog.article}</Typography>
+        <Typography gutterBottom>{blog.article}</Typography>
         <Typography
           sx={{ color: "black", fontStyle: "italic" }}
           variant="body2"
