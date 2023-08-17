@@ -14,19 +14,17 @@ app.use("/api", router);
 app.use("/api", userRoutes);
 dotenv.config();
 
-const PORT = process.env.PORT || 5000;
+const PORT = 5000;
+const mongodb = process.env.MONGODB_URL;
 
 mongoose
-  .connect(
-    "mongodb+srv://kayangejr3:kayange@cluster0.ulxfc7o.mongodb.net/mernApp?retryWrites=true&w=majority",
-    {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    }
-  )
+  .connect(mongodb, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
   .then(() => app.listen(PORT))
   .then(() => {
-    //console.log(`Connected to database and app is running on port ${PORT}`);
+    console.log(`Connected to database and app is running on port ${PORT}`);
   })
   .catch((err) => {
     console.log(err.message);
