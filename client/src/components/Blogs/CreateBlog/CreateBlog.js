@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Box,
   Button,
@@ -18,20 +18,29 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { createPost } from "../../../actions";
 
-const initialPoststate = {
-  title: "",
-  article: "",
-  tags: [],
-};
-
 const CreateBlog = () => {
   const [selectedFile, setSelectedFile] = useState(null);
   const userId = JSON.parse(localStorage.getItem("profile"))?.result?._id;
+  const initialPoststate = {
+    title: "",
+    article: "",
+    tags: [],
+    bannerImage: selectedFile,
+    user: userId,
+  };
   const dispatch = useDispatch();
   const [postData, setPostData] = useState(initialPoststate);
   const theme = useTheme();
   const navigate = useNavigate();
 
+  useEffect(() => {
+    setPostData(() => ({
+      ...postData,
+      bannerImage: selectedFile,
+      user: userId,
+    }));
+  }, [postData, selectedFile, userId]);
+  
   const handleImage = (e) => {
     const reader = new FileReader();
     if (e.target.files[0]) {
@@ -43,15 +52,8 @@ const CreateBlog = () => {
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    setPostData(() => ({
-      ...postData,
-      user: userId,
-      bannerImage: selectedFile,
-    }));
-
     dispatch(createPost(postData));
-
-    setPostData(initialPoststate);
+    setPostData({});
     navigate("/home");
   };
 
@@ -106,7 +108,7 @@ const CreateBlog = () => {
             />
             <TextField
               multiline={true}
-              maxRows={6}
+              maxRows={8}
               minRows={6}
               inputMode="text"
               label="Article"
@@ -146,7 +148,7 @@ const CreateBlog = () => {
             </Button>
           </Box>
         </form>
-        <Box component="div" flex={2}>
+        <Box ml={2} component="div" flex={2}>
           {selectedFile && (
             <Box
               display="flex"

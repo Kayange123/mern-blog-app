@@ -10,6 +10,7 @@ const UseStorage = (file) => {
   const [error, setError] = useState(0);
   const [url, setUrl] = useState(0);
 
+  
   useEffect(() => {
     const storageRef = blogsStorage.ref(file.name);
     const collectionRef = blogsFirestore.collection("images");

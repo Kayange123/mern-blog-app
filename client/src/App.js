@@ -2,21 +2,25 @@ import React, { useEffect, useMemo, useState } from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
 import Home from "./containers/Home/Home";
 import Layout from "./components/Layout/Layout";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import { themeSettings } from "./assets/theme";
 import { createTheme } from "@mui/material/styles";
 import { Auth, PopularBlogs, BlogDetails } from "./components";
 import CreateBlog from "./components/Blogs/CreateBlog/CreateBlog";
+import { getPosts } from "./actions";
 
 function App() {
   const mode = useSelector((state) => state.globalSlice.mode);
   const theme = useMemo(() => createTheme(themeSettings(mode)), [mode]);
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
+  const dispatch = useDispatch();
+  const state = useSelector((state) => state.posts);
 
   useEffect(() => {
     setUser(JSON.parse(localStorage.getItem("profile")));
-  }, []);
+    dispatch(getPosts());
+  }, [dispatch, state]);
   return (
     <div className="app">
       <ThemeProvider theme={theme}>

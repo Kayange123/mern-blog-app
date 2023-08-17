@@ -52,15 +52,15 @@ export const postBlog = async (req, res, next) => {
   });
 
   try {
-    const session = await mongoose.startSession();
-    session.startTransaction();
+    // const session = await mongoose.startSession();
+    // session.startTransaction();
     // await blog.save({ session });
     // existingUser.blogs.push(blog);
     // await existingUser.save({ session });
-    await blog.save({ session });
+    await blog.save();
     existingUser.blogs.push(blog);
-    await existingUser.save({ session });
-    await session.commitTransaction();
+    await existingUser.save();
+    // await session.commitTransaction();
   } catch (error) {
     console.log(error);
     return res.status(500).json({ message: error });

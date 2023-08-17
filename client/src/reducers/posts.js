@@ -4,7 +4,7 @@ export default (posts = [], action) => {
   const { blogs } = posts;
   switch (action.type) {
     case GET_POSTS:
-      return [...blogs, action.payload];
+      return action.payload;
     case CREATE:
       return [...blogs, action.payload];
     case DELETE:
